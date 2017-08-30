@@ -2,6 +2,7 @@
 
 This is the firmware for the nucleo-f746zg
 
+
 # Driver and udev rule
 The nucleo needs a udev rule installed in
 
