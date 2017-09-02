@@ -8,7 +8,7 @@
 #include "ComProtocol.h"
 
 void ComProtocol::event(float * buffer){
-
+	float lastPosition = 0;
   //printf("\nPid Server Event");
   bool skipLink = false;
   for(int i=0; i<myPumberOfPidChannels;i++){
@@ -68,12 +68,14 @@ void ComProtocol::event(float * buffer){
   for(int i=0; i<myPumberOfPidChannels;i++){
 
     float position = myPidObjects[i]->GetPIDPosition();
-    float velocity = position * 400;
+    float velocity = (position - lastPosition) * 400;
     float torque = 12; // dummy value
     // write upstream packets
     buffer[(i*3)+0] = position;
     buffer[(i*3)+1] = velocity;
     buffer[(i*3)+2] = torque;
+
+    lastPosition = position;
 
   }
   // for(int i=0; i<15;i++){
