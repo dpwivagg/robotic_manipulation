@@ -1,7 +1,7 @@
 #include "main.h"
 
 #define  numberOfPid  3
-#define DUMMYLINKS
+// #define DUMMYLINKS
 // reportLength max size is 64 for HID
 Ticker pidTimer;
 static PIDBowler*  pid[numberOfPid];
@@ -20,9 +20,9 @@ void runPid(){
 }
 int main() {
 #if defined(DUMMYLINKS)
-   pid[0] =(PIDBowler*) new DummyPID();
+   /*pid[0] =(PIDBowler*) new DummyPID();
    pid[1] =(PIDBowler*) new DummyPID();
-   pid[2] =(PIDBowler*) new DummyPID();
+   pid[2] =(PIDBowler*) new DummyPID();*/
 #else
    pid[0] = new PIDimp( new Servo(SERVO_1, 5),
                          new AS5050(MOSI, MISO, CLK, ENC_1));  // mosi, miso, sclk, cs
