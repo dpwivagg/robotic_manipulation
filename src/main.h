@@ -18,6 +18,7 @@
 
 //Coms
 #include "coms/PidServer.h"
+#include "coms/ComProtocol.h"
 // HDMI 9
 #define SERVO_1 PE_9
 #define SERVO_2 PE_11
