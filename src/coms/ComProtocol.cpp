@@ -6,10 +6,13 @@
  */
 
 #include "ComProtocol.h"
-/*
-float lastPosition[3] = {0,0,0};
-float homingArray[3] = {165,0,0};
-*/
+
+//static float lastPosition[3] = {0,0,0};
+
+// An array that contains the normal error for each link
+// i.e., how much to subtract from encoder value to reach "Home" position
+static float homingArray[3] = {7,0,0};
+
 void ComProtocol::event(float * buffer){
   //printf("\nPid Server Event");
   bool skipLink = false;
@@ -69,7 +72,8 @@ void ComProtocol::event(float * buffer){
   //printf("\nPid Server Event");ComProtocol
   for(int i=0; i<myPumberOfPidChannels;i++){
 
-    float position = myPidObjects[i]->GetPIDPosition();// - homingArray[i];
+    float position = myPidObjects[i]->GetPIDPosition();
+    position = position - homingArray[i];
     float velocity = /*(position - lastPosition[i]) * 400;*/ 13;
     float torque = 12; // dummy value
     // write upstream packets
