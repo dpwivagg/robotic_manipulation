@@ -7,6 +7,8 @@ Ticker pidTimer;
 static PIDBowler*  pid[numberOfPid];
 HIDSimplePacket coms;
 float  calibrations[3] = {0,0,0};
+AnalogOut dacOut(PA_5);
+float current = 0.0;
 //float  calibrations[3] = {114,784,-10};
 
 
@@ -80,6 +82,8 @@ int main() {
           pid[0]->GetPIDPosition(),
           pid[1]->GetPIDPosition(),
           pid[2]->GetPIDPosition());
+          current = pid[0]->GetPIDPosition();
+          dacOut = (current + 1300) * (3.3 / 2500);
         }
 
 
