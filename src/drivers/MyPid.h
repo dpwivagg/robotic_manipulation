@@ -4,9 +4,9 @@
 #include "AS5050.h"
 #include "Servo.h"
 #include "RunEvery.h"
-#define kp 0.001
-#define ki 0
-#define kd 0.1
+#define kp 0.005
+#define ki 0.01
+#define kd 0.075
 #define vkp 0.01
 #define vkd 0
 
