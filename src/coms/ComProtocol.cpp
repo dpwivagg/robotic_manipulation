@@ -29,7 +29,8 @@ void ComProtocol::event(float * buffer){
     float timeOfMotion=0;
     if(velocityTarget>0)
      timeOfMotion=(std::abs(setpoint-position)/velocityTarget)*1000;// convert from Tics per second to miliseconds
-    bool newUpdate = !myPidObjects[i]->bound(setpoint,
+
+	bool newUpdate = !myPidObjects[i]->bound(setpoint,
       myPidObjects[i]->state.interpolate.set,
       0.01,
      0.01);

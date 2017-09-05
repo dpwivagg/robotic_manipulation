@@ -4,11 +4,13 @@
 #include "AS5050.h"
 #include "Servo.h"
 #include "RunEvery.h"
-#define kp 1
+#define kp 0.001
 #define ki 0
-#define kd 0
-#define vkp 0.05
+#define kd 0.1
+#define vkp 0.01
 #define vkd 0
+
+#define arraySize 4
 class PIDimp : public PIDBowler{
 public:
   // constructor taking in the hardware objects
@@ -22,6 +24,8 @@ public:
   void MathCalculationVelocity( float);
   PidLimitEvent* checkPIDLimitEvents();
   float getMs();
+  float positions[arraySize];
+  int i = 0;
   // These are parts of the concrete class
   AS5050 * encoder;
   Servo * servo;
