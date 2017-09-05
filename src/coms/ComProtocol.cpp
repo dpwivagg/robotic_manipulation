@@ -7,7 +7,7 @@
 
 #include "ComProtocol.h"
 
-//static float lastPosition[3] = {0,0,0};
+static float lastPosition[3] = {0,0,0};
 
 // An array that contains the normal error for each link
 // i.e., how much to subtract from encoder value to reach "Home" position
@@ -74,14 +74,14 @@ void ComProtocol::event(float * buffer){
 
     float position = myPidObjects[i]->GetPIDPosition();
     position = position - homingArray[i];
-    float velocity = /*(position - lastPosition[i]) * 400;*/ 13;
+    float velocity = (position - lastPosition[i]) * 400;
     float torque = 12; // dummy value
     // write upstream packets
     buffer[(i*3)+0] = position;
     buffer[(i*3)+1] = velocity;
     buffer[(i*3)+2] = torque;
 
-    // lastPosition[i] = position;
+    lastPosition[i] = position;
   }
 
   // for(int i=0; i<15;i++){
