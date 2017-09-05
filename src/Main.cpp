@@ -82,6 +82,7 @@ int main() {
           pid[0]->GetPIDPosition(),
           pid[1]->GetPIDPosition(),
           pid[2]->GetPIDPosition());
+          // Convert the encoder ticks to a voltage, then write out to the DAC
           current = pid[0]->GetPIDPosition();
           dacOut = (current + 1300) * (3.3 / 2500);
         }
