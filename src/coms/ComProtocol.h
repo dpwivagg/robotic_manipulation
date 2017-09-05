@@ -9,7 +9,8 @@
 #define Pid_server2
 #include <PID_Bowler.h>
 #include <PacketEvent.h>
-#include "../drivers/MyPid.h"
+#include "../drivers/MyPid.h"\
+//#include "AnalogOut.h"
 #include <cmath>        // std::abs
 #define PidServerID 38
 
@@ -17,6 +18,7 @@ class ComProtocol: public PacketEventAbstract{
 private:
   PIDBowler* * myPidObjects;
    int myPumberOfPidChannels;
+//   AnalogOut dacout(PA_5);
 public:
   // Packet ID needs to be set
   ComProtocol (PIDBowler* * pidObjects, int numberOfPidChannels )

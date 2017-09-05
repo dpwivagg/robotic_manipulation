@@ -82,6 +82,8 @@ void ComProtocol::event(float * buffer){
     buffer[(i*3)+1] = velocity;
     buffer[(i*3)+2] = torque;
 
+//    dacOut = position;
+
     lastPosition[i] = position;
   }
 
