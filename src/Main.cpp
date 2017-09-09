@@ -28,13 +28,13 @@ int main() {
    pid[1] =(PIDBowler*) new DummyPID();
    pid[2] =(PIDBowler*) new DummyPID();
 #else
-   SPI * spiDev = new SPI(MOSI, MISO, CLK);
+//   SPI * spiDev = new SPI(MOSI, MISO, CLK);
    pid[0] = new PIDimp( new Servo(SERVO_1, 5),
-                         new AS5050(spiDev, ENC_1));  // mosi, miso, sclk, cs
+                         new AS5050(MOSI, MISO, CLK, ENC_1));  // mosi, miso, sclk, cs
    pid[1] = new PIDimp( new Servo(SERVO_2, 5),
-                         new AS5050(spiDev, ENC_2));  // mosi, miso, sclk, cs
+                         new AS5050(MOSI, MISO, CLK, ENC_2));  // mosi, miso, sclk, cs
    pid[2] = new PIDimp( new Servo(SERVO_3, 5),
-                         new AS5050(spiDev, ENC_3));  // mosi, miso, sclk, cs
+                         new AS5050(MOSI, MISO, CLK, ENC_3));  // mosi, miso, sclk, cs
 #endif
 
    // Invert the direction of the motor vs the input
