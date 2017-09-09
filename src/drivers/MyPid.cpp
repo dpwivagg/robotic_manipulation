@@ -12,13 +12,13 @@ PIDimp::PIDimp(Servo * myServo, AS5050 * myEncoder){
 }
 // Return the current position of the system
 float PIDimp::getPosition( ){
-	positions[i] = (float)encoder->totalAngle();
-	i++;
-	if(i>3) i = 0;
-	return (positions[0] + positions[1] + positions[2] + positions[3]) / 4;
+//	positions[i] = (float)encoder->totalAngle();
+//	i++;
+//	if(i>3) i = 0;
+//	return (positions[0] + positions[1] + positions[2] + positions[3]) / 4;
+//
 
-
-//	return (float)encoder->totalAngle();
+	return (float)encoder->totalAngle();
 }
 //Send controller signel to the motors, bounded and scaled by the configurations
 void PIDimp::setOutputLocal( float currentOutputValue){
