@@ -7,8 +7,6 @@ Ticker pidTimer;
 static PIDBowler*  pid[numberOfPid];
 HIDSimplePacket coms;
 float  calibrations[3] = {0,0,0};
-AnalogOut dacOut(PA_5);
-float current = 0.0;
 //float  calibrations[3] = {114,784,-10};
 
 AnalogOut dacOut(PA_5);
@@ -32,11 +30,11 @@ int main() {
 #else
    SPI * spiDev = new SPI(MOSI, MISO, CLK);
    pid[0] = new PIDimp( new Servo(SERVO_1, 5),
-                         new AS5050(SPI, ENC_1));  // mosi, miso, sclk, cs
+                         new AS5050(spiDev, ENC_1));  // mosi, miso, sclk, cs
    pid[1] = new PIDimp( new Servo(SERVO_2, 5),
-                         new AS5050(SPI, ENC_2));  // mosi, miso, sclk, cs
+                         new AS5050(spiDev, ENC_2));  // mosi, miso, sclk, cs
    pid[2] = new PIDimp( new Servo(SERVO_3, 5),
-                         new AS5050(SPI, ENC_3));  // mosi, miso, sclk, cs
+                         new AS5050(spiDev, ENC_3));  // mosi, miso, sclk, cs
 #endif
 
    // Invert the direction of the motor vs the input
@@ -80,6 +78,7 @@ int main() {
    */
 
    coms.attach(new PidServer (pid, numberOfPid ));
+   coms.attach(new ComProtocol (pid, numberOfPid));
    printf("\r\n\r\n Starting Core \r\n\r\n");
 
    RunEveryObject* print = new RunEveryObject(0,500);

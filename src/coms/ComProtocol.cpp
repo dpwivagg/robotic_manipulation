@@ -11,7 +11,7 @@ static float lastPosition[3] = {0,0,0};
 
 // An array that contains the normal error for each link
 // i.e., how much to subtract from encoder value to reach "Home" position
-static float homingArray[3] = {8190,4052,783};
+static float homingArray[3] = {0,-42,773};
 
 void ComProtocol::event(float * buffer){
   //printf("\nPid Server Event");
@@ -67,7 +67,7 @@ void ComProtocol::event(float * buffer){
    //}
   }
   uint8_t * buff = (uint8_t *)buffer;
-  for(int i=4; i<64;i++){
+  for(int i=4; i<60;i++){
     buff[i]=0;
   }
   //printf("\nPid Server Event");ComProtocol
