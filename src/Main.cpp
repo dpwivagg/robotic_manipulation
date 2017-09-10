@@ -22,7 +22,6 @@ void runPid(){
 }
 int main() {
 	printf("\r\n\r\n Top of Main \r\n\r\n");
-
 #if defined(DUMMYLINKS)
    pid[0] =(PIDBowler*) new DummyPID();
    pid[1] =(PIDBowler*) new DummyPID();
@@ -34,10 +33,10 @@ int main() {
 						 0.005, 0.01, 0.075);  // mosi, miso, sclk, cs
    pid[1] = new PIDimp( new Servo(SERVO_2, 5),
                          new AS5050(spiDev, ENC_2),
-						 0.005, 0.01, 0.075);  // mosi, miso, sclk, cs
+						 0.003, 0.2, 0.005);  // mosi, miso, sclk, cs
    pid[2] = new PIDimp( new Servo(SERVO_3, 5),
                          new AS5050(spiDev, ENC_3),
-						 0.005, 0.01, 0.075);  // mosi, miso, sclk, cs
+						 0.005, 0.05, 0.005);  // mosi, miso, sclk, cs
 #endif
 
    // Invert the direction of the motor vs the input
