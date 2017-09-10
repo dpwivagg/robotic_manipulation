@@ -7,6 +7,8 @@ Ticker pidTimer;
 static PIDBowler*  pid[numberOfPid];
 HIDSimplePacket coms;
 float  calibrations[3] = {0,0,0};
+AnalogOut dacOut(PA_5);
+float current = 0.0;
 //float  calibrations[3] = {114,784,-10};
 
 AnalogOut dacOut(PA_5);
@@ -21,6 +23,8 @@ void runPid(){
       pid[i]->updateControl();
 }
 int main() {
+	printf("\r\n\r\n Top of Main \r\n\r\n");
+
 #if defined(DUMMYLINKS)
    pid[0] =(PIDBowler*) new DummyPID();
    pid[1] =(PIDBowler*) new DummyPID();
@@ -40,7 +44,8 @@ int main() {
    for (int i=0;i<numberOfPid;i++){
      pid[i]->state.config.Enabled=false;// disable PID to start with
    }
-   pidTimer.attach(&runPid, 0.0025);
+   wait_ms(500);// Cosines delay
+   pidTimer.attach(&runPid, 0.005);
    // capture 100 ms of encoders before starting
    wait_ms(100);
    for (int i=0;i<numberOfPid;i++){
@@ -73,8 +78,10 @@ int main() {
    // Run a homing procedure to scale the velocity outputs  where 123 is the value of the encoder at home
    pid[0]->startHomingLink( CALIBRARTION_home_velocity, 123);
    */
+
    coms.attach(new PidServer (pid, numberOfPid ));
-   printf("\n\n Starting Core \n\n");
+   printf("\r\n\r\n Starting Core \r\n\r\n");
+
    RunEveryObject* print = new RunEveryObject(0,500);
     while(1) {
         coms.server();
@@ -83,11 +90,9 @@ int main() {
           pid[0]->GetPIDPosition(),
           pid[1]->GetPIDPosition(),
           pid[2]->GetPIDPosition());
-
           // Convert the encoder ticks to a voltage, then write out to the DAC
 //          current = pid[0]->GetPIDPosition();
 //          dacOut = (current + 1300) * (3.3 / 2500);
-
         }
 
 
