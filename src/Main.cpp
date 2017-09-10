@@ -1,7 +1,7 @@
 #include "main.h"
 
 #define  numberOfPid  3
-#define DUMMYLINKS
+//#define DUMMYLINKS
 // reportLength max size is 64 for HID
 Ticker pidTimer;
 static PIDBowler*  pid[numberOfPid];
@@ -9,6 +9,8 @@ HIDSimplePacket coms;
 float  calibrations[3] = {0,0,0};
 //float  calibrations[3] = {114,784,-10};
 
+AnalogOut dacOut(PA_5);
+float current = 0.0;
 
 void runPid(){
   // update all positions fast and together
@@ -24,12 +26,13 @@ int main() {
    pid[1] =(PIDBowler*) new DummyPID();
    pid[2] =(PIDBowler*) new DummyPID();
 #else
+   SPI * spiDev = new SPI(MOSI, MISO, CLK);
    pid[0] = new PIDimp( new Servo(SERVO_1, 5),
-                         new AS5050(MOSI, MISO, CLK, ENC_1));  // mosi, miso, sclk, cs
+                         new AS5050(SPI, ENC_1));  // mosi, miso, sclk, cs
    pid[1] = new PIDimp( new Servo(SERVO_2, 5),
-                         new AS5050(MOSI, MISO, CLK, ENC_2));  // mosi, miso, sclk, cs
+                         new AS5050(SPI, ENC_2));  // mosi, miso, sclk, cs
    pid[2] = new PIDimp( new Servo(SERVO_3, 5),
-                         new AS5050(MOSI, MISO, CLK, ENC_3));  // mosi, miso, sclk, cs
+                         new AS5050(SPI, ENC_3));  // mosi, miso, sclk, cs
 #endif
 
    // Invert the direction of the motor vs the input
@@ -80,6 +83,11 @@ int main() {
           pid[0]->GetPIDPosition(),
           pid[1]->GetPIDPosition(),
           pid[2]->GetPIDPosition());
+
+          // Convert the encoder ticks to a voltage, then write out to the DAC
+//          current = pid[0]->GetPIDPosition();
+//          dacOut = (current + 1300) * (3.3 / 2500);
+
         }
 
 
