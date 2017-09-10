@@ -15,7 +15,7 @@ float DummyPID::resetPosition( float newCenter){
   return getPosition();
 }
 void DummyPID::onPidConfigureLocal(){
-  setPIDConstants(kp, ki, kd);
+  setPIDConstants(1,1,1);//kp, ki, kd);
   // pd velocity constants
   state.config.V.P=vkp;
   state.config.V.D=vkd;

@@ -1,14 +1,16 @@
 
 #include "MyPid.h"
 #include "Clock.h"
-PIDimp::PIDimp(Servo * myServo, AS5050 * myEncoder){
+PIDimp::PIDimp(Servo * myServo, AS5050 * myEncoder, float kpIn, float kdIn, float kiIn){
   servo = myServo;
   encoder = myEncoder;
   positions[0] = (float)encoder->totalAngle();
   positions[1] = (float)encoder->totalAngle();
   positions[2] = (float)encoder->totalAngle();
   positions[3] = (float)encoder->totalAngle();
-
+  kp = kpIn;
+  kd = kdIn;
+  ki = kiIn;
 }
 // Return the current position of the system
 float PIDimp::getPosition( ){
