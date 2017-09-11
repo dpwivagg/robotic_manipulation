@@ -30,13 +30,13 @@ int main() {
    SPI * spiDev = new SPI(MOSI, MISO, CLK);
    pid[0] = new PIDimp( new Servo(SERVO_1, 5),
                          new AS5050(spiDev, ENC_1),
-						 0.005, 0.01, 0.075);  // mosi, miso, sclk, cs
+						 0.005, 0.1, 0);  // mosi, miso, sclk, cs
    pid[1] = new PIDimp( new Servo(SERVO_2, 5),
                          new AS5050(spiDev, ENC_2),
-						 0.003, 0,0);  // mosi, miso, sclk, cs
+						 0.005, 0.03,0.0005);  // mosi, miso, sclk, cs
    pid[2] = new PIDimp( new Servo(SERVO_3, 5),
                          new AS5050(spiDev, ENC_3),
-						 0.003, 0,0);  // mosi, miso, sclk, cs
+						 0.003,0.0,0);// 0.02,0.0001);  // mosi, miso, sclk, cs
 #endif
 
    // Invert the direction of the motor vs the input
@@ -92,8 +92,8 @@ int main() {
           pid[1]->GetPIDPosition(),
           pid[2]->GetPIDPosition());
           // Convert the encoder ticks to a voltage, then write out to the DAC
-          current = pid[1]->GetPIDPosition();
-          dacOut = (current + 270) * (3.3 / 2700);
+          current = pid[2]->GetPIDPosition();
+          dacOut = (current - 400) * (3.3 / 2800);
         }
 
 
