@@ -22,6 +22,7 @@ void ComProtocol::event(float * buffer){
 
     // read values from the packet buffer
     float setpoint        = buffer[(i*3)+0];
+    setpoint = setpoint + homingArray[i];
     float velocityTarget  = buffer[(i*3)+1];
     float forceTarget     = buffer[(i*3)+2];
 
