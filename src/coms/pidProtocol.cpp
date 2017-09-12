@@ -12,14 +12,14 @@ void pidProtocol::event(float * buffer){
 	//printf("\nPid Server Event");
 	for(int i=0; i<myPumberOfPidChannels;i++){
 		// read values from the packet buffer
-		float kp = buffer[(i*3)+0];
-		float ki = buffer[(i*3)+1];
-		float kd = buffer[(i*3)+2];
+		float kpIn = buffer[(i*3)+0];
+		float kiIn = buffer[(i*3)+1];
+		float kdIn = buffer[(i*3)+2];
 
 		//perform state update
 
 		__disable_irq();    // Disable Interrupts
-		myPidObjects[i]->setPIDConstants(kp, ki, kd);
+		myPidObjects[i]->setPIDConstants(kpIn, kiIn, kdIn);
 		__enable_irq();
 
 	}

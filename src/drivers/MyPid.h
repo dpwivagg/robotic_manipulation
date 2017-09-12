@@ -4,9 +4,9 @@
 #include "AS5050.h"
 #include "Servo.h"
 #include "RunEvery.h"
-//#define kp 0.005
-//#define ki 0.01
-//#define kd 0.075
+#define kp 0.005
+#define ki 0.01
+#define kd 0.075
 #define vkp 0.01
 #define vkd 0
 
@@ -14,7 +14,7 @@
 class PIDimp : public PIDBowler{
 public:
   // constructor taking in the hardware objects
-  PIDimp(Servo * myServo, AS5050 * myEncoder, float kp, float kd, float ki);
+  PIDimp(Servo * myServo, AS5050 * myEncoder);
   // these are implementations of the abstract functions
   float getPosition();
   void setOutputLocal( float);
@@ -29,7 +29,6 @@ public:
   // These are parts of the concrete class
   AS5050 * encoder;
   Servo * servo;
-  float kp, kd, ki;
 
 };
 #endif
