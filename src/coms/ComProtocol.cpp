@@ -83,7 +83,7 @@ void ComProtocol::event(float * buffer){
     buffer[(i*3)+1] = velocity;
     buffer[(i*3)+2] = torque;
 
-    if(myPidObjects[i]->isPIDArrivedAtSetpoint(10))
+    if(myPidObjects[i]->isPIDArrivedAtSetpoint(20))
     	buffer[9+i] = 1;
     else buffer[9+i] = 0;
 
