@@ -18,6 +18,7 @@
 //Coms
 #include "coms/PidServer.h"
 #include "coms/ComProtocol.h"
+#include "coms/pidProtocol.h"
 
 // DEFINES
 
