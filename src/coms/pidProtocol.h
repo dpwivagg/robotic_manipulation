@@ -1,27 +1,26 @@
 /*
- * ComProtocol.h
+ * pidProtocol.h
  *
- *  Created on: Sep 2, 2017
+ *  Created on: Sep 12, 2017
  *      Author: dpwivagg
  */
 
-#ifndef  Pid_server2
-#define Pid_server2
+#ifndef  Pid_server3
+#define Pid_server3
 #include <PID_Bowler.h>
 #include <PacketEvent.h>
 #include "../drivers/MyPid.h"\
 //#include "AnalogOut.h"
 #include <cmath>        // std::abs
 
-class ComProtocol: public PacketEventAbstract{
+class pidProtocol: public PacketEventAbstract{
 private:
   PIDBowler* * myPidObjects;
    int myPumberOfPidChannels;
-//   AnalogOut dacout(PA_5);
 public:
   // Packet ID needs to be set
-  ComProtocol (PIDBowler* * pidObjects, int numberOfPidChannels )
-   : PacketEventAbstract( 38){
+  pidProtocol (PIDBowler* * pidObjects, int numberOfPidChannels )
+   : PacketEventAbstract( 39){
     myPidObjects=pidObjects;
     myPumberOfPidChannels=numberOfPidChannels;
   }
