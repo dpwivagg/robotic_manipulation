@@ -1,13 +1,10 @@
-#ifndef ForceSense
-#define ForceSense
+#ifndef force_sensing
+#define force_sensing
 #include "../main.h"
+#include "../../mbed-os/drivers/AnalogIn.h"
 
 class ForceSense{
 private:
-
-	AnalogIn force1(LOAD_1);
-	AnalogIn force2(LOAD_2);
-	AnalogIn force3(LOAD_3);
 
 	float forceArray[12];
 	float returnValues[3];

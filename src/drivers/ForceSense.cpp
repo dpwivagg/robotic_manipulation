@@ -1,21 +1,27 @@
 #include "ForceSense.h"
 
+AnalogIn force1(LOAD_1);
+AnalogIn force2(LOAD_2);
+AnalogIn force3(LOAD_3);
+
 ForceSense::ForceSense(){
-	forceArray[0] = force1;
-	forceArray[1] = force1;
-	forceArray[2] = force1;
-	forceArray[3] = force1;
-	forceArray[4] = force2;
-	forceArray[5] = force2;
-	forceArray[6] = force2;
-	forceArray[7] = force2;
-	forceArray[8] = force3;
-	forceArray[9] = force3;
-	forceArray[10] = force3;
-	forceArray[11] = force3;
+
+	forceArray[0] = force1.read();
+	forceArray[1] = force1.read();
+	forceArray[2] = force1.read();
+	forceArray[3] = force1.read();
+	forceArray[4] = force2.read();
+	forceArray[5] = force2.read();
+	forceArray[6] = force2.read();
+	forceArray[7] = force2.read();
+	forceArray[8] = force3.read();
+	forceArray[9] = force3.read();
+	forceArray[10] = force3.read();
+	forceArray[11] = force3.read();
+
 }
 
-float * ForceSense::readForce(int sensor) {
+float * ForceSense::readForce() {
 
 	// First, update the array with current values
 	forceArray[j] = force1;
@@ -36,8 +42,6 @@ float * ForceSense::readForce(int sensor) {
 	// Let's return a pointer to this array so we can access
 	// all the values at once
 
-	double *returnForces = &returnValues;
-
-	return returnForces;
+	return &returnValues[0];
 
 }
