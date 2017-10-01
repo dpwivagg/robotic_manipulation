@@ -10,6 +10,7 @@
 #include <PID_Bowler.h>
 #include <PacketEvent.h>
 #include "../drivers/MyPid.h"
+#include "../drivers/ForceSense.h"
 #include <cmath>        // std::abs
 
 class ComProtocol: public PacketEventAbstract{

@@ -13,6 +13,8 @@ static float lastPosition[3] = {0,0,0};
 // i.e., how much to subtract from encoder value to reach "Home" position
 static float homingArray[3] = {-225,-42,773};
 
+ForceSense sensors;
+
 void ComProtocol::event(float * buffer){
   //printf("\nPid Server Event");
   bool skipLink = false;
@@ -71,13 +73,15 @@ void ComProtocol::event(float * buffer){
   for(int i=4; i<60;i++){
     buff[i]=0;
   }
+  // Update the force sensor readings
+  float *readings = sensors.readForce();
   //printf("\nPid Server Event");ComProtocol
   for(int i=0; i<myPumberOfPidChannels;i++){
 
     float position = myPidObjects[i]->GetPIDPosition();
     position = position - homingArray[i];
     float velocity = (position - lastPosition[i]) * 400;
-    float torque = 15; // dummy value
+    float torque = readings[i]; // dummy value
     // write upstream packets
     buffer[(i*3)+0] = position;
     buffer[(i*3)+1] = velocity;
