@@ -13,7 +13,6 @@ static float lastPosition[3] = {0,0,0};
 // i.e., how much to subtract from encoder value to reach "Home" position
 static float homingArray[3] = {-225,-42,773};
 
-ForceSense sensors;
 
 void ComProtocol::event(float * buffer){
   //printf("\nPid Server Event");

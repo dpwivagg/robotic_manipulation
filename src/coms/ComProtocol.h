@@ -18,12 +18,14 @@ private:
   PIDBowler* * myPidObjects;
    int myPumberOfPidChannels;
 //   AnalogOut dacout(PA_5);
+   ForceSense sensors;
 public:
   // Packet ID needs to be set
   ComProtocol (PIDBowler* * pidObjects, int numberOfPidChannels )
    : PacketEventAbstract( 38){
     myPidObjects=pidObjects;
     myPumberOfPidChannels=numberOfPidChannels;
+
   }
   //User function to be called when a packet comes in
   // Buffer contains data from the packet coming in at the start of the function

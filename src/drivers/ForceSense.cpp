@@ -1,8 +1,8 @@
 #include "ForceSense.h"
 
-AnalogIn force1(LOAD_1);
-AnalogIn force2(LOAD_2);
-AnalogIn force3(LOAD_3);
+AnalogIn force1(PA_3);
+AnalogIn force2(PC_0);
+AnalogIn force3(PC_3);
 
 ForceSense::ForceSense(){
 

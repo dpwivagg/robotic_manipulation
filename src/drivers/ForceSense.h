@@ -1,7 +1,8 @@
 #ifndef force_sensing
 #define force_sensing
-#include "../main.h"
 #include "../../mbed-os/drivers/AnalogIn.h"
+#include "AS5050.h"
+#include "mbed.h"
 
 class ForceSense{
 private:
