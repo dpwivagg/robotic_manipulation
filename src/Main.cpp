@@ -78,6 +78,7 @@ int main() {
    coms.attach(new PidServer (pid, numberOfPid ));
    coms.attach(new ComProtocol (pid, numberOfPid));
    coms.attach(new pidProtocol (pid, numberOfPid));
+   coms.attach(new servoGrab());
    printf("\r\n\r\n Starting Core \r\n\r\n");
 
    RunEveryObject* print = new RunEveryObject(0,500);
