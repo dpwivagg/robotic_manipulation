@@ -14,16 +14,11 @@ void servoGrab::event(float * buffer){
     // read values from the packet buffer
 	servoState = buffer[0];
 
-	if(servoState = 100) {
-		servo1.write(1);
-		// servo open
-	}
-	else if(servoState = 75) {
-		servo1.write(1.75);
-		// servo close
-	}
+	servo1 = servoState;
 
-	buffer[0] = 0;
+	float currentPos = servo1.read();
+
+	buffer[0] = currentPos;
 }
 
 
