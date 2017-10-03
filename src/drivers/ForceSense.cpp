@@ -1,5 +1,6 @@
 #include "ForceSense.h"
 
+
 AnalogIn force1(PA_3);
 AnalogIn force2(PC_0);
 AnalogIn force3(PC_3);
@@ -38,6 +39,17 @@ float * ForceSense::readForce() {
 				forceArray[6] + forceArray[7]) / 4;
 	returnValues[2] = (forceArray[8] + forceArray[9] +
 				forceArray[10] + forceArray[11]) / 4;
+
+	// Convert the values to a digital 12-bit value
+	returnValues[0] = returnValues[0] * 4095;
+	returnValues[1] = returnValues[1] * 4095;
+	returnValues[2] = returnValues[2] * 4095;
+
+	// Convert those 12-bit values to an applied load in Newtons
+	returnValues[0] = (returnValues[0] - 1965) / 178.5;
+	returnValues[1] = (returnValues[1] - 2047) / 178.5;
+	returnValues[2] = (returnValues[2] - 1863) / 178.5;
+
 
 	// Let's return a pointer to this array so we can access
 	// all the values at once
