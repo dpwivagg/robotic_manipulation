@@ -7,7 +7,7 @@
 class ForceSense{
 private:
 
-	float forceArray[12];
+	float forceArray[18];
 	float returnValues[3];
 
 	int j = 0;

@@ -80,7 +80,7 @@ void ComProtocol::event(float * buffer){
     float position = myPidObjects[i]->GetPIDPosition();
     position = position - homingArray[i];
     float velocity = (position - lastPosition[i]) * 400;
-    float torque = readings[i]; // dummy value
+    float torque = readings[i];
     // write upstream packets
     buffer[(i*3)+0] = position;
     buffer[(i*3)+1] = velocity;
